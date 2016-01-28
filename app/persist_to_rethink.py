@@ -19,9 +19,12 @@ data = json.loads(people)
 
 connection = r.connect(host=RDB_HOST, port=RDB_PORT)
 
-
 # check if exists -> then if not create
-graph.schema.create_uniqueness_constraint("Person", "name")
+try:
+    graph.schema.create_uniqueness_constraint("Person", "name")
+except Exception as e:
+    pass
+
 # assuming email is unique
 
 
@@ -30,13 +33,16 @@ def full_text_search():
 
 
 def graph_person(person):
+    """
     person = Node(
         "Person", name=person.get('name'), gender=person.get('gender'),
         company=person.get('company'))
-
+    """
     # person.push()
-    graph.merge_one(person)
+    # graph.merge_one(person)
     # neo-4j limitation
+
+    return graph.merge_one("Person", "name", person.get('name'))
 
 
 # Sophia Goldman
@@ -81,15 +87,15 @@ def persist_to_rethink(person):
     # print total_friends
 
 
-if __name__ == 'main':
+if __name__ == "__main__":
     for person in data:
         print person.get('id'), person.get('gender')
 
         # persist_to_rethink(person)
 
         try:
-            # graph_person(person)
-            create_relationships_friends(person)
+            graph_person(person)
+            # create_relationships_friends(person)
 
         except py2neo.GraphError as e:
             print e
