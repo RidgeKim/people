@@ -111,8 +111,8 @@ GET http://localhost:9200/users/people/_search?name=Ian
 ```bash
 $ python persist_to_rethink.py
 $ python build_social_graph.py
-$ python run_query_es.py
 $ python get_mutual_friends.py
+$ python run_query_es.py
 ```
 
 ### Fix java - java 1.8 and above

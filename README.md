@@ -1,3 +1,14 @@
+### Running (at base dir)
+
+```bash
+$ python app/persist_to_rethink.py
+$ python app/build_social_graph.py
+$ python app/get_mutual_friends.py
+$ python app/run_query_es.py
+```
+
+## Design Decisions
+
 ### Why RethinkDB
 
 - It's a noSQL document data-store, I used this because it has no implicit schema definition. And also it provides json support, it's a built in type and one can run a query inserting a JSON document.
