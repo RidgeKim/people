@@ -98,7 +98,7 @@ GET http://localhost:9200/users/people/_search?name=Ian
 #### Then the river plugin backfills and constantly polls - with change feeds in rethinkDB this is faster and more efficient
 
 
-### Running
+### Services to Run
 - start neo4j - service neo4j-service start
 - start rethinkDB - service rethinkdb start
 - start elasticsearch - service elasticsearch start
@@ -110,3 +110,4 @@ $ python graph.py
 $ python run_query_es.py
 $ python get_mutual_friends.py
 ```
+

@@ -28,7 +28,7 @@ except Exception as e:
 # assuming email is unique
 
 
-def full_text_search():
+def full_text_search(search_by='name'):
     pass
 
 
@@ -48,13 +48,15 @@ def graph_person(person):
 # Sophia Goldman
 # Alexis Galbraith
 def reccommend_friends(name, limit=5):
-    """MATCH (person:Person)-[:FRIENDS_WITH]->(friend),
+    query = """MATCH (person:Person)-[:FRIENDS_WITH]->(friend),
       (friend)-[:FRIENDS_WITH]->(friend_two:Person)
 
     WHERE person.name = "%s"
-    RETURN friend_two.name, count(*) as mutual
+    RETURN friend_two.name as mutual_friend, count(*) as mutual
     ORDER BY mutual DESC
     LIMIT %d""" % (name, limit)
+
+    return graph.cypher.execute(query)
 
 
 def create_relationships_friends(person):
@@ -88,14 +90,16 @@ def persist_to_rethink(person):
 
 
 if __name__ == "__main__":
+
     for person in data:
         print person.get('id'), person.get('gender')
 
-        # persist_to_rethink(person)
+        persist_to_rethink(person)
 
         try:
-            graph_person(person)
+            # graph_person(person)
             # create_relationships_friends(person)
+            print reccommend_friends(person.get('name'), limit=10)
 
         except py2neo.GraphError as e:
             print e
