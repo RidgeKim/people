@@ -17,7 +17,7 @@
 
 
 ### Install ES, rethinkDB river
-- Install instructions -> https://github.com/rethinkdb/elasticsearch-river-rethinkdb (java 8)
+- Install instructions -> https://github.com/rethinkdb/elasticsearch-river-rethinkdb (on java 8)
 
 
 ### Install neo-4J - 2.1.5
@@ -27,6 +27,8 @@
 ### Setup ES, rethinkDB river plugin to pull chnage feeds from rethinkDB to ES
 
 - index
+
+```python
 curl -XPUT localhost:9200/_river/rethinkdb/_meta -d '{
    "type":"rethinkdb",
    "rethinkdb": {
@@ -34,9 +36,10 @@ curl -XPUT localhost:9200/_river/rethinkdb/_meta -d '{
      "host": "localhost",
      "port": 28015
    }}'
+```
 
 
-### Pulling data from RethinkDB with partial
+### Pulling data from RethinkDB with partial (logs - process)
 
 ```bash SUCCESS_PARTIAL:2
 13:17:51.233 [elasticsearch[Franz Kafka][rethinkdb_river][T#1]] DEBUG com.rethinkdb.RethinkDBConnection - running type: CONTINUE
@@ -67,6 +70,7 @@ SUCCESS_PARTIAL:2
 token: 2
 ```
 
+### Index
 
 ```python curl -XPUT localhost:9200/_river/rethinkdb/_meta -d '{
   "type": "rethinkdb",
@@ -95,7 +99,7 @@ GET http://localhost:9200/users/_search?about=et
 GET http://localhost:9200/users/people/_search?name=Ian
 
 
-#### Then the river plugin backfills and constantly polls - with change feeds in rethinkDB this is faster and more efficient
+### Then the river plugin backfills and constantly polls - with change feeds in rethinkDB this is faster and more efficient
 
 
 ### Services to Run
@@ -111,3 +115,12 @@ $ python run_query_es.py
 $ python get_mutual_friends.py
 ```
 
+### Fix java - java 1.8 and above
+
+### Why full text search with ES, RethinkDB
+ - graphing with neo4j -> social graph only natural - 5 billion nodes
+ - document database with an ES river plugin -> because it's JSON document
+ - ease of manipulation
+
+
+#### Then ES backfillls and constantly polls - with change feeds in rethinkDB this is faster and more efficient
