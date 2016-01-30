@@ -7,6 +7,12 @@ $ python app/get_mutual_friends.py
 $ python app/run_query_es.py
 ```
 
+1. persist_to_rethink - to write the json documents to rethinkDB.
+2. build_social_graph - to add nodes and create relationships, the social graph
+3. get_mutual_frieds  - reccomend friends based on mutual friends, tags to demonstrate interests could have been used.
+4. run_query_es       - ES query to perform full text search.
+
+
 ## Design Decisions
 
 ### Why RethinkDB
