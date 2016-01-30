@@ -37,7 +37,7 @@ if __name__ == "__main__":
         print person.get('id'), person.get('gender')
 
         try:
-            reccommend_friends(person.get('name'))
+            print reccommend_friends(person.get('name'))
 
         except Exception as f:
             print f
