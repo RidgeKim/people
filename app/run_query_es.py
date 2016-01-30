@@ -6,7 +6,7 @@ people = open("people.json").read()
 
 data = json.loads(people)
 
-base_url = "GET http://localhost:9200/users/people/_search?%s=%s"
+base_url = "http://localhost:9200/users/people/_search?%s=%s"
 
 
 def full_text_search(some_value, search_by='name'):
@@ -22,7 +22,7 @@ if __name__ == "__main__":
         print person.get('id'), person.get('gender')
 
         try:
-        	full_text_search(person.get('name'))
+        	print full_text_search(person.get('name'))
 
         except Exception as f:
             print f
